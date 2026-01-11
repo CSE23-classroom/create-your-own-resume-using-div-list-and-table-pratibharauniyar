@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PINTEREST</title>
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #ffffff;
+}
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e60023;
+}
+
+.nav-btn {
+    padding: 12px 16px;
+    border: none;
+    background-color: #111111;
+    color: #ffffff;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    max-width: 800px;
+    margin: 0 12px;
+    padding: 12px 16px;
+    background-color: #efefef;
+    border-radius: 24px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+}
+
+.search-bar input::placeholder {
+    color: #767676;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btn-login {
+    padding: 12px 16px;
+    border: none;
+    background-color: #e60023;
+    color: #ffffff;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-signup {
+    padding: 12px 16px;
+    border: none;
+    background-color: #efefef;
+    color: #333;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    max-width: 1200px;
+}
+
+.text-section {
+    flex: 1;
+    max-width: 500px;
+}
+
+.text-section h1 {
+    font-size: 60px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.text-section p {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.btn-join {
+    padding: 16px 24px;
+    border: none;
+    background-color: #e60023;
+    color: #ffffff;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-join:hover {
+    background-color: #ad081b;
+}
+
+/* Board Preview */
+.board-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.board-card {
+    background-color: #efefef;
+    border-radius: 24px;
+    padding: 24px;
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.board-images {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.img-large {
+    width: 60%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.img-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 40%;
+}
+
+.img-small {
+    width: 100%;
+    height: 146px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.board-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.board-details h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.board-details p {
+    font-size: 14px;
+    color: #767676;
+}
+
+.board-avatars {
+    display: flex;
+    gap: -8px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #efefef;
+    object-fit: cover;
+}
+
+.avatar:not(:first-child) {
+    margin-left: -12px;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .content-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .text-section h1 {
+        font-size: 48px;
+    }
+    
+    .nav-link {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-section h1 {
+        font-size: 36px;
+    }
+    
+    .board-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+/* Footer Styles */
+.footer {
+    background-color: #f7f7f7;
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-section h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #767676;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-section ul li a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #e60023;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.footer-logo svg {
+    width: 20px;
+    height: 20px;
+}
+
+.copyright {
+    font-size: 12px;
+    color: #767676;
+}
+
+.footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.language-selector {
+    font-size: 14px;
+    color: #767676;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.language-selector:hover {
+    background: #e9e9e9;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    text-decoration: none;
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.social-icon:hover {
+    background: #e9e9e9;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-bottom-left {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+</style>  
+    
+</head>
+<body>
+    <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#e60023">
+                    <path d=1.66.962-2.9 2.161-2.9 1.02 0 1.512.765 1.512 1.682 0 1.025-.653 2.557-.99 3.978-.281 1.189.597 2.159 1.769 2.159 2.123 0 3.756-2.239 3.756-5.471 0-2.861-2.056-4.86-4.991-4.86-3.398 0-5.393 2.549-5.393 5.184 0 1.027.395 2.127.889 2.726a.36.36 0 0 1 .083.343c-.091.378-.293 1.189-.332 1.355-.053.218-.173.265-.4.159-1.492-.694-2.424-2.875-2.424-4.627 0-3.769 2.737-7.229 7.892-7.229 4.144 0 7.365 2.953 7.365 6.899 0 4.117-2.595 7.431-6.199 7.431-1.211 0-2.348-.63-2.738-1.373 0 0-.599 2.282-.744 2.84-.282 1.084-1.064 2.456-1.549 3.235C9.584 23.815 10.77 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12"></path>
+                </svg>
+                <span class="logo-text">Pinterest</span>
+            </div>
+            <button class="nav-btn">Explore</button>
+        </div>
+        
+        <div class="search-bar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#767676">
+                <path d="m0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+            </svg>
+            <input type="text" placeholder="Search for easy dinners, fashion, etc.">
+        </div>
+        
+        <div class="nav-right">
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Businesses</a>
+            <a href="#" class="nav-link">Create</a>
+            <a href="#" class="nav-link">News</a>
+            <button class="btn-login">Log in</button>
+            <button class="btn-signup">Sign up</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="text-section">
+                <h1>Collaborate with group boards</h1>
+                <p>Visualize your ideas with others, using a Pinterest account</p>
+                <button class="btn-join">Join Pinterest</button>
+            </div>
+            
+            <div class="board-preview">
+                <div class="board-card">
+                    <div class="board-images">
+                        <img src="https://i.pinimg.com/originals/d1/cf/9a/d1cf9aa775e6364e7d9b4b588f653ef4.jpg" alt="mandala art" class="img-large">
+                        <div class="img-column">
+                            <img src="https://i.pinimg.com/originals/73/f6/42/73f642f96b8413ab746ddd544f4968f1.jpg" alt="mandala art" class="img-small">
+                            <img src="https://i.pinimg.com/originals/9a/01/f9/9a01f94b90cf90b2985c96c6a65d1674.jpg" alt="mandala art" class="img-small">
+                        </div>
+                    </div>
+                    <div class="board-info">
+                        <div class="board-details">
+                            <h3>Mandala Art</h3>
+                            <p>80 Pins</p>
+                        </div>
+                        <div class="board-avatars">
+                            <img src="https://i.pinimg.com/originals/33/96/63/3396639616085a23a3720df2f8955161.jpg" alt="User 1" class="avatar">
+                            <img src="https://i.pinimg.com/originals/e0/bc/94/e0bc945c110325e9dc2d30c58fb26071.jpg" alt="User 2" class="avatar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <section class="testimonials-section">
+        <div class="testimonials-header">
+            <h1>Our Clients</h1>
+            <p>We believe in Clients satisfaction.Here are some testimonials by our worthy clients.</p>
+        </div>
+        <div class="Testimonials-grid">
+            <!--Testimonial Card 1-->
+            <div class=""
+            <img src=" " alt=" " class=" ">
+            <div class="Testimonial-content">
+                <p class="client-name"><strong>Rose</strong></p>
+                <p class="quote">I had a very good time using pinterest,it's features are amazing.Very creative,very helpful for any idea</p>
+                <p class="client-title"><strong>UX Designer</strong></p>
+            </div>
+<!--Testimonial Card 2-->
+
+        </div>
+    </section>
+        <!-- Add this before closing </body> tag -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Get inspired</h4>
+            <ul>
+                <li><a href="#">Today's inspiration</a></li>
+                <li><a href="#">Popular on Pinterest</a></li>
+                <li><a href="#">Watch</a></li>
+                <li><a href="#">Shop</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>About</h4>
+            <ul>
+                <li><a href="#">About Pinterest</a></li>
+                <li><a href="#">Newsroom</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Business</h4>
+            <ul>
+                <li><a href="#">Pinterest for Business</a></li>
+                <li><a href="#">Shopping on Pinterest</a></li>
+                <li><a href="#">Pinterest advertising</a></li>
+                <li><a href="#">Become a merchant</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Policies</h4>
+            <ul>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">Terms of service</a></li>
+                <li><a href="#">Copyright & trademark</a></li>
+                <li><a href="#">Personalization & data</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>More</h4>
+            <ul>
+                <li><a href="#">Help center</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Developers</a></li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-bottom-left">
+            <div class="footer-logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M0 12c0 5.123 3.211 9.497 7.73 11.218-.11-.937-.227-2.482.025-3.566.217-.932 1.401-5.938 1.401-5.938s-.357-.715-.357-1.774c0-1.66.962-2.9 2.161-2.9 1.02 0 1.512.765 1.512 1.682 0 1.025-.653 2.557-.99 3.978-.281 1.189.597 2.159 1.769 2.159 2.123 0 3.756-2.239 3.756-5.471 0-2.861-2.056-4.86-4.991-4.86-3.398 0-5.393 2.549-5.393 5.184 0 1.027.395 2.127.889 2.726a.36.36 0 0 1 .083.343c-.091.378-.293 1.189-.332 1.355-.053.218-.173.265-.4.159-1.492-.694-2.424-2.875-2.424-4.627 0-3.769 2.737-7.229 7.892-7.229 4.144 0 7.365 2.953 7.365 6.899 0 4.117-2.595 7.431-6.199 7.431-1.211 0-2.348-.63-2.738-1.373 0 0-.599 2.282-.744 2.84-.282 1.084-1.064 2.456-1.549 3.235C9.584 23.815 10.77 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12z"/>
+                </svg>
+                <span>Pinterest</span>
+            </div>
+            <p class="copyright">© 2025 Pinterest</p>
+        </div>
+
+        <div class="footer-bottom-right">
+            <div class="language-selector">
+                <span>🌐 English (US)</span>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    
+</body>
+</html>
